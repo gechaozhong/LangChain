@@ -3,26 +3,32 @@ import os
 
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
+from langchain.document_loaders import DocugamiLoader
 from langchain.llms import OpenAI, openai
 from dotenv import load_dotenv
 from langchain.embeddings import HuggingFaceEmbeddings, OpenAIEmbeddings
 from langchain.vectorstores import Chroma
-
+from constants import CHROMA_SETTINGS
 from ChatGLM import ChatGLM
 
-load_dotenv("config.env")
+load_dotenv()
 embeddings_model_name = os.environ.get("EMBEDDINGS_MODEL_NAME")
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
 target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS', 4))
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-from constants import CHROMA_SETTINGS
 
+
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 if __name__ == '__main__':
+    print(embeddings_model_name)
+    print(persist_directory)
+    print(target_source_chunks)
+
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
     db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
     retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
+
 
     # llm = OpenAI(model_name="text-ada-001", n=2, best_of=2)
     llm = ChatGLM()
