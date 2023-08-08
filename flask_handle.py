@@ -17,10 +17,10 @@ def post_handle():
             ai_response = LangChainLLM.request(content)
             print(f"ai response: {ai_response}")
         # 在这里进行处理，可以根据需要对数据进行操作
-        result = {"message": "Data received successfully", "aiResponse": ai_response}
+        result = {"message": "Data handle successfully", "aiResponse": ai_response}
         response = jsonify(result)
         response.headers['Content-Type'] = 'application/json; charset=utf-8'
-        return response
+        return response, 200
     except Exception as e:
         return jsonify({"error": "An error occurred", "details": str(e)}), 500
 
