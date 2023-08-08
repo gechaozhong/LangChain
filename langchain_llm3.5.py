@@ -15,10 +15,10 @@ from langchain.prompts.chat import (
 class LangChainLLM35(object):
     def __init__(self, my_template):
         load_dotenv()
-        system_message_prompt = SystemMessagePromptTemplate.from_template(my_template)
-        human_template = "{text}"
-        human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
-        chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+        #system_message_prompt = SystemMessagePromptTemplate.from_template(my_template)
+        #human_template = "{text}"
+        human_message_prompt = HumanMessagePromptTemplate.from_template(my_template)
+        chat_prompt = ChatPromptTemplate.from_messages([human_message_prompt])
         try:
             self.llm = ChatOpenAI(temperature=0, model_name=os.getenv("MODEL_NAME_3.5"), openai_api_key=os.getenv("OPENAI_API_KEY"))
             print(f"LLM final_prompt: {chat_prompt}")
@@ -37,4 +37,4 @@ class LangChainLLM35(object):
 if __name__ == '__main__':
     template = "{text}何许人也."
     LangChainLLM = LangChainLLM35(template)
-    print(LangChainLLM.request("诸葛亮是何许人也"))
+    print(LangChainLLM.request("诸葛亮"))
