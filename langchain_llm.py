@@ -26,7 +26,7 @@ class LangChainLLM(object):
         try:
             return self.llm(final_prompt)
         except ConnectionError:
-            return "The connection error occur"
+            return "The llm function execute failed."
 
 
 if __name__ == '__main__':

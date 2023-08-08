@@ -31,10 +31,10 @@ class LangChainLLM35(object):
         try:
             return self.chain.run(input_language="Chinese", output_language="Chinese", text=message)
         except ConnectionError:
-            return "The connection error occur"
+            return "The chain.run function execute failed."
 
 
 if __name__ == '__main__':
     template = "{text}何许人也."
     LangChainLLM = LangChainLLM35(template)
-    print(LangChainLLM.request("诸葛亮"))
+    print(LangChainLLM.request("周瑜"))
